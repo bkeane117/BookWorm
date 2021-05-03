@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EmojiRatingVIew: View {
+struct EmojiRatingView: View {
     let rating: Int16
     
     var body: some View {
@@ -29,6 +29,6 @@ struct EmojiRatingVIew: View {
 
 struct EmojiRatingVIew_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiRatingVIew(rating: 3)
+        EmojiRatingView(rating: 3)
     }
 }
