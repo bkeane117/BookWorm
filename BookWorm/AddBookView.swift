@@ -17,9 +17,20 @@ struct AddBookView: View {
     @State private var rating = 3
     @State private var genre = ""
     @State private var review = ""
+    @State private var date = Date()
     
     let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"
     ]
+    
+    var hasValidBook: Bool {
+        if title.isEmpty || author.isEmpty || genre.isEmpty {
+            return false
+        } else {
+            return true
+        }
+        
+    }
+    
     var body: some View {
         NavigationView {
             Form {
@@ -48,10 +59,12 @@ struct AddBookView: View {
                         newBook.rating = Int16(self.rating)
                         newBook.genre = self.genre
                         newBook.review = self.review
+                        newBook.date = Date()
                         
                         try? self.moc.save()
                         self.presentationMode.wrappedValue.dismiss()
                     }
+                    .disabled(hasValidBook == false)
                 }
             }
             .navigationBarTitle("Add Book")

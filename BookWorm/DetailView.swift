@@ -14,6 +14,25 @@ struct DetailView: View {
     
     @State private var showingDeleteAlert = false
     
+    var formattedBookDate: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter.string(from: self.book.date ?? Date())
+    }
+    
+    /*
+    // creates a robust date return value
+    var formattedLaunchDate: String {
+        if let launchDate = launchDate {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            return formatter.string(from: launchDate)
+        } else {
+            return "N/A"
+        }
+    }
+ */
+    
     let book: Book
     var body: some View {
         GeometryReader { geometry in
@@ -37,6 +56,9 @@ struct DetailView: View {
                     .foregroundColor(.secondary)
                 
                 Text(self.book.review ?? "No review")
+                    .padding()
+                
+                Text("Date completed: \(formattedBookDate)")
                     .padding()
                 
                 RatingView(rating: .constant(Int(self.book.rating)))
